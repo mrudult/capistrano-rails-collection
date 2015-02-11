@@ -69,6 +69,17 @@ namespace :rails do
           end
         end
       end
+
+      desc 'Creates a database as mentioned in database.yml'
+      task :create do
+        on primary :db do
+          within release_path do
+            with rails_env: fetch(:stage) do
+              execute :rake, 'db:create'
+            end
+          end
+        end
+      end
     end
   end
 end
